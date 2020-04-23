@@ -1,6 +1,9 @@
 import os
 from werkzeug.utils import secure_filename
 from flask import Flask, request, url_for, send_from_directory, redirect
+from mtcnn.mtcnn import MTCNN
+import cv2
+import numpy as np
 
 UPLOAD_FOLDER = '/home/uploads/'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
@@ -11,10 +14,10 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 def allowed_file(filename):
 	return '.' in filename and filename.rspilt('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-def face_detection():
-	# Implement different
-	# Machine Learning Models
-	return True
+def mtcnn_face(img: np.array) -> dict:
+        detector = MTCNN()
+        faces = detector.detect_faces(img)
+        return faces
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
