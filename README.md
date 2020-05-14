@@ -1,5 +1,5 @@
 # Face detection implementaions
-Comparing Open Source Face detection algorithms
+Comparing and Exploring Open Source Face detection algorithms
 
 1. Python
     - Clone the repo
